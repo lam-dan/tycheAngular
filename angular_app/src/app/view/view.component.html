@@ -1,0 +1,48 @@
+
+
+
+<img src ="{{cake.imgurl}}">
+
+<form (submit) = "addReview(cake._id)">
+
+	<ul><b>Rating: </b>
+		<select input type = "text"  name="review.rating" [(ngModel)] = "review.rating"  >
+			<option value = "1">1</option>
+			<option value = "2">2</option>
+			<option value = "3">3</option>
+			<option value = "4">4</option>
+			<option value = "5">5</option>
+		</select></ul>
+
+		<b>Review: </b> 
+		<br>
+		<textarea name="review.comment" [(ngModel)] = "review.comment"> </textarea>
+		<br>
+		<input type = "submit" value = "Submit Review">
+	</form>
+
+	<ul><span class ='bold'>Baker: </span>{{cake.baker}}</ul>
+
+	<p *ngIf = "NaN"></p> 
+	<ul><span class ='bold'>Average Rating: </span> 
+		<ul *ngIf = "average">{{average}}</ul>
+	</ul>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Comment</th>
+				<th>Rating</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr *ngFor = "let i of cake.reviews | orderBy: '-rating'">
+				<td>{{i.comment}}</td>
+				<td>{{i.rating}}</td>
+				<td><button (click) = "deleteReview(i._id)">Delete</button></td>	
+			</tr>
+		</tbody>
+	</table>
+
