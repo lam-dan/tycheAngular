@@ -1,39 +1,57 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { NewsApiService } from './news-api.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule } from '@angular/material';
+
+import { AppComponent } from './app.component';
+
+import { HttpService } from './http.service';
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 
-import { ReviewComponent } from './review/review.component';
-import { CreateComponent } from './create/create.component';
-import { ListComponent } from './list/list.component';
-import { EditComponent } from './edit/edit.component';
-import { ViewComponent } from './view/view.component';
 import {NgPipesModule} from 'ngx-pipes';
+import { CommentComponent } from './comment/comment.component';
+import { ShareComponent } from './share/share.component';
+import { ChatroomComponent } from './chatroom/chatroom.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReviewComponent,
-    CreateComponent,
-    ListComponent,
-    EditComponent,
-    ViewComponent
+
+    CommentComponent,
+
+    ShareComponent,
+
+    ChatroomComponent
 
   ],
 
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
     FormsModule,
     AppRoutingModule,
     NgPipesModule
   ],
-  providers: [HttpService],
+  providers: [HttpService,NewsApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
+
+

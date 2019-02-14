@@ -1,25 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateComponent } from './create/create.component';
-import { ListComponent } from './list/list.component';
+
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { EditComponent } from './edit/edit.component';
-import { ReviewComponent } from './review/review.component';
-import { ViewComponent } from './view/view.component';
-
 
 const routes: Routes = [
-  // { path: '',component: AppComponent },
+  { path: '',component: AppComponent }
   // use a colon and parameter name to include a parameter in the url
   // { path: 'gamma/:id', component: GammaComponent },
   // redirect to /alpha if there is nothing in the url
-  { path: '', pathMatch: 'full', redirectTo: '/list' },
-  { path: 'cakes/new', component: CreateComponent},
-  { path: 'reviews/new/:id', component: ReviewComponent},
-  { path: 'list', component: ListComponent},
-  { path: 'view/:id', component: ViewComponent},
-  { path: 'edit/:id', component: EditComponent}
+  // { path: '', pathMatch: 'full', redirectTo: '/list' },
+
   // the ** will catch anything that did not match any of the above routes
 
 ];

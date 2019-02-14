@@ -1,0 +1,19 @@
+<div class = "chatroom">
+	<!-- adds message to p tag -->
+	<mat-card-content>
+		<p id = "chat"></p>
+	</mat-card-content>
+</div>
+
+<div class = "chatbox">
+
+	<form id ="trigger" (submit) = "sendMessage(messageText)">
+
+		<input id = "message" type="text" name="messageText" [(ngModel)] = "messageText"><br>
+		<input type="submit" value="Send">
+	</form>
+
+</div>
+
+<!-- {{messageText | json}}
+{{messages | json}} -->

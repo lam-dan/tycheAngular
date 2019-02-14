@@ -1,4 +1,5 @@
 var session = require('express-session');
+
 // Require the Express Module
 var express = require('express');
 // Create an Express App
@@ -39,8 +40,37 @@ require('./server/config/mongoose.js')
 app.all("*", (req,res,next) => {
   res.sendFile(path.resolve("./angular_app/dist/public/index.html"))
 });
-// Setting our Server to Listen on Port: 8000
-app.listen(8000, function() {
-    console.log("listening on port 8000");
+
+const server = app.listen(8000, function() {
+  console.log("listening on port 8000");
 })
+
+var io = require('socket.io')(server);
+var port = 8000;
+var message = "";
+
+//connecting to our socket
+io.on('connection', (socket) => {
+  console.log('new connection made');
+
+//server broadcasts new user to all by emitting message back to component.ts
+socket.on("got_a_new_user",function(name){
+
+  message += "<p>" + name.data + " has joined the chatroom. </p>";
+
+  io.emit('new_user',message);
+
+});
+
+socket.on("send-message",function(messageText){
+
+  message += "<p>" + messageText + "</p>";
+  // console.log("Message received from client: " + message);
+  io.emit("messageToAll", message);
+
+});
+
+
+});
+
 

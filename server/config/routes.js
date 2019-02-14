@@ -2,30 +2,41 @@ var mainController = require('../controllers/mainController');
 
 module.exports = function(app){
 
-// //retrieve all documents
-// app.get('/cakes', mainController.index);
+// retrieve all comments
+app.get('/getComments', mainController.getComments);
 
-// //retrieve 1 document with name
-// app.get('/cake/:id', mainController.view);
+//retrieve 1 article with name
+app.get('/getOneArticle/:id', mainController.view);
 
-// create cake
+// retrieve all articles
+app.get('/getArticles', mainController.getArticles);
+
 app.post('/new', mainController.create);
 
-app.get('/getAll', mainController.getAll);
+app.put('/addComment', mainController.addComment);
 
-app.get('/getCake/:id', mainController.getCake);
+app.put('/addLike', mainController.addLike);
 
-// // create review
-app.put('/newReview/:id', mainController.createReview);
+// app.delete('deleteComment', mainController.deleteComment);
+
+// //delete 
+app.delete('/deleteUser/:id', mainController.deleteUser);
+
+// //delete 
+app.delete('/deleteComment/:id', mainController.deleteComment);
+
+app.get('/getUsers', mainController.getUsers);
+
+app.post('/sendEmail', mainController.sendEmail);
 
 // // update  
-app.put('/update/:id', mainController.update);
+// app.put('/update/:id', mainController.update);
 
 // //delete 
-app.delete('/removeObj/:id', mainController.delete);
+app.post('/deleteArticleComment/:id', mainController.deleteArticleComment);
 
-// //delete 
-app.post('/removeReview/:id', mainController.deleteReview);
+app.put('/updateUser/:id', mainController.updateUser);
+
 
 
 }

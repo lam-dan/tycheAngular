@@ -1,0 +1,19 @@
+<form (submit) ="addComment()">
+	<p>First Name: <input type = "text" name = "user.first_name" [(ngModel)] = "user.first_name" size = "15">
+		Last Name: <input type = "text" name = "user.last_name" [(ngModel)] = "user.last_name" size = "15">
+	</p>
+	<p>Email: <input type = "text" name = "user.email" [(ngModel)] = "user.email" size = "21"></p>
+	<textarea name = "comment.comment" [(ngModel)] = "comment.comment" ></textarea>
+	<input type = "submit" value = "Submit">
+</form>
+
+<p></p>
+
+<div *ngFor = "let i of article.comments" >
+	<span style="color:blue">{{i.user.first_name}} {{i.user.last_name}}</span> {{i.comment}} <span class = "date">{{i.createdAt | date:'medium'}}</span>
+	<button (click) = "deleteComment(i)">Delete</button>
+
+</div>
+
+<!-- {{user | json}}
+{{comment | json}} -->
