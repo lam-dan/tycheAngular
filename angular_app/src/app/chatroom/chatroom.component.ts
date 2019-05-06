@@ -9,10 +9,10 @@ import * as $ from 'jquery';
 	templateUrl: './chatroom.component.html',
 	styleUrls: ['./chatroom.component.css']
 })
+
 export class ChatroomComponent implements OnInit {
 	@Input() childChatVariable:any;
 	messageText: string;
-	// messages: Array<any>;
 	socket: SocketIOClient.Socket;
 	name: any;
 
@@ -21,13 +21,11 @@ export class ChatroomComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		$('.chatroom').scrollTop($('.chatroom')[0].scrollHeight);
 		// this.messages = new Array();
 		//function to broadcast a global message when a new user joins to all sockets
 		this.name = prompt("Please enter your name:");
 		var number = Math.floor((Math.random()*1000)+1);
-
 		if (this.name === null){
 			if(number.toString().length < 3){
 				this.name = 'Guest0'+number;
@@ -38,7 +36,6 @@ export class ChatroomComponent implements OnInit {
 		this.socket.emit("got_a_new_user", {data:this.name});
 		
 		this.socket.on('new_user', function(data){
-			console.log(data);
 			$("#chat").html(data);
 			$('.chatroom').scrollTop($('.chatroom')[0].scrollHeight);
 		});
@@ -49,11 +46,9 @@ export class ChatroomComponent implements OnInit {
 		this.socket.emit('send-message', messageText);
 		//receives message from server and sends it back to front-end
 		this.socket.on("messageToAll", function(message){
-			console.log("Message received from Server to broadcast to all: "+ message);
 			$("#chat").html(message);
 			$('.chatroom').scrollTop($('.chatroom')[0].scrollHeight);
 		});	
-
 		this.messageText = "";
 	}
 }

@@ -25,7 +25,6 @@ module.exports = {
     			res.json({message: "Success"})
     		}
     	})
-
     },
 
     updateUser: function(req, res) {
@@ -61,10 +60,6 @@ module.exports = {
     deleteEmail: function(req, res) {
     	// code...
     	console.log("Main Controller");
-
-
-
-
     },
 
     sendEmail: function(req,res){
@@ -278,7 +273,7 @@ module.exports = {
 	
 	create: function(req, res) {
 		var article;
-		// console.log(req.body.articles);
+		console.log(req.body.articles);
 		console.log("Main Controller");
 
 		Article.find({},function(err,articles){
@@ -316,6 +311,8 @@ module.exports = {
 					// console.log(articles);
 					//api data
 					// console.log(req.body.articles);
+
+					//creates a variable called upLoadResult that are only articles that aren't in MongoDB
 					var uploadResult = req.body.articles.filter(
 						function(o1){
 					    // filter out (!) items in result2
@@ -328,6 +325,7 @@ module.exports = {
 					        });
 					})
 
+					//Iterates over uploadResult object and saves each of them article objects into Mongo
 					for (var i = 0; i<uploadResult.length;i++){
 						article = new Article(uploadResult[i]);
 						article.comments = [];

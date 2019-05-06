@@ -10,7 +10,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class CommentComponent implements OnInit {
   @Input() childVariable:any;
   comment:any;
-  // allComments:any;
   user:any;
   article:any;
   displaycomments: any;
@@ -42,22 +41,15 @@ export class CommentComponent implements OnInit {
       last_name: "",
       email: ""
     }
-    // this.getAllArticles();
+
     this.getOneArticle();
   }
 
   addComment(){
-
-    console.log("Inside comment component");
-    console.log(this.childVariable);
-    console.log(this.childVariable._id);
     this.comment['user'] = this.user;
-    console.log(this.comment);
 
     let observable = this._httpService.addComment(this.childVariable._id,this.comment);
     observable.subscribe(data => {
-      console.log("Data received from observable in component.")
-      console.log(data);
       this.getOneArticle();
 
       this.comment = {
@@ -76,15 +68,9 @@ export class CommentComponent implements OnInit {
 
   getOneArticle(){
 
-    console.log("Comment Component");
-    console.log(this.childVariable._id);
     let observable = this._httpService.getOneArticle(this.childVariable._id);
     observable.subscribe(data => {
-      console.log("Inside the observable");
-      console.log(data['article']);
       this.article = data['article'][0];
-      console.log(this.article);
-
     })
 
   }
@@ -110,18 +96,12 @@ export class CommentComponent implements OnInit {
 
       if(comment._id == currentArticle.comments[i]._id){
 
-        console.log("Inside If Statement for For Loop");
         var temp = currentArticle.comments[i];
         currentArticle.comments[i] = currentArticle.comments[currentArticle.comments.length-1];
         currentArticle.comments[currentArticle.comments.length-1] = temp;
         currentArticle.comments.pop();
-        console.log(currentArticle);
-
       }
     }
-
-    console.log(currentArticle);
-    console.log(this.article._id);
 
     let observable = this._httpService.deleteArticleComment(this.article._id,currentArticle);
     observable.subscribe(data => {

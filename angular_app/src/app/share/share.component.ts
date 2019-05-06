@@ -30,19 +30,14 @@ export class ShareComponent implements OnInit {
 			subject:"",			
 			text:"",
 		}
-
 		this.getUsers();
 	}
 
 	sendEmail(user){
-
-		console.log("Sending E-mail");
 		user['article'] = this.childShareVariable;
-		console.log(user);
 
 		let observable = this._httpService.sendEmail(user);
 		observable.subscribe(data => {
-			console.log("Inside the observable");
 		})
 		this.text = {
 			from:"",
@@ -54,49 +49,30 @@ export class ShareComponent implements OnInit {
 	}
 
 	deleteUser(user) {
-
 		let observable = this._httpService.deleteUser(user._id);
 		observable.subscribe(data => {
 			this.getUsers();
 		})
-
-
 	}
 
 	updateUser(object){
-		console.log(object);
 
 		let observable = this._httpService.updateUser(object._id,object);
 		  observable.subscribe(data => {
-			  console.log("Inside the observable");
-			  console.log(data);
 			  this.getUsers();
-			  
 			  })
-
-
-
 		}
 
 	getUsers(){
 
 		let observable = this._httpService.getUsers();
 		observable.subscribe(data => {
-			console.log("Got all Users in the Observable");
-			// console.log(data['users']);
 			this.users = data['users'];
 
 		for(var user of this.users){
 			user['message'] = "";
 			}
 		})
-
-
-
-
 	}
-
-
-
 
 }
